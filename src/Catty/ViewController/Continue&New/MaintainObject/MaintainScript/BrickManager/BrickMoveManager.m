@@ -57,6 +57,18 @@
 {
     Script *fromScript = [object.scriptList objectAtIndex:fromIndexPath.section];
     Brick *fromBrick;
+    
+    if (fromIndexPath.item == 0 && fromScript.isAnimatedMoveBrick) {
+        self.moveToOtherScript = NO;
+        if (toIndexPath.section < fromIndexPath.section) {
+            self.higherRankBrick = toIndexPath;
+        } else {
+            self.lowerRankBrick = toIndexPath;
+        }
+        
+        return YES;
+    }
+    
     if (fromIndexPath.item == 0) {
         fromBrick = [fromScript.brickList objectAtIndex:fromIndexPath.item];
     } else{

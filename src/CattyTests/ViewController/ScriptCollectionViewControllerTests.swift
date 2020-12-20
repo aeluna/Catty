@@ -170,6 +170,24 @@ final class ScriptCollectionViewControllerTests: XCTestCase {
         XCTAssertFalse(viewController.collectionView(viewController.collectionView, canMoveItemAt: indexPathNoteBrick))
     }
 
+    func testCollectionViewCanMoveScriptAtIndexPath() {
+        let startScript = StartScript()
+        let whenScript = WhenScript()
+        let waitBrick = WaitBrick()
+        let noteBrick = NoteBrick()
+        let setBackgroundBrick = SetBackgroundBrick()
+        let indexPathStartScript = IndexPath(row: 0, section: 0)
+        let indexPathWhenScript = IndexPath(row: 0, section: 1)
+
+        startScript.brickList = [waitBrick, noteBrick]
+        whenScript.brickList = [setBackgroundBrick]
+        spriteObject.scriptList = [startScript, whenScript]
+
+        (BrickInsertManager.sharedInstance() as! BrickInsertManager).setBrickInsertionMode(false)
+        XCTAssertTrue(viewController.collectionView(viewController.collectionView, canMoveItemAt: indexPathWhenScript))
+        XCTAssertTrue(viewController.collectionView(viewController.collectionView, canMoveItemAt: indexPathStartScript))
+    }
+
     func testCollectionViewCanMoveItemAtIndexPathScriptInsertionMode() {
         let startScript = StartScript()
         let waitBrick = WaitBrick()
@@ -184,5 +202,25 @@ final class ScriptCollectionViewControllerTests: XCTestCase {
         XCTAssertFalse(viewController.collectionView(viewController.collectionView, canMoveItemAt: indexPathStartScript))
         (BrickInsertManager.sharedInstance() as! BrickInsertManager).setBrickInsertionMode(true)
         XCTAssertTrue(viewController.collectionView(viewController.collectionView, canMoveItemAt: indexPathWhenScript))
+    }
+
+    func testCollectionViewCanMoveScriptAtIndexPathMoveMode() {
+        let startScript = StartScript()
+        let whenScript = WhenScript()
+        let waitBrick = WaitBrick()
+        let noteBrick = NoteBrick()
+        let setBackgroundBrick = SetBackgroundBrick()
+        let indexPathStartScript = IndexPath(row: 0, section: 0)
+        let indexPathWhenScript = IndexPath(row: 0, section: 1)
+
+        startScript.brickList = [waitBrick, noteBrick]
+        whenScript.brickList = [setBackgroundBrick]
+        spriteObject.scriptList = [startScript, whenScript]
+        whenScript.isAnimatedMoveBrick = true
+
+        (BrickInsertManager.sharedInstance() as! BrickInsertManager).setBrickInsertionMode(true)
+        XCTAssertTrue(viewController.collectionView(viewController.collectionView, canMoveItemAt: indexPathWhenScript))
+        (BrickInsertManager.sharedInstance() as! BrickInsertManager).setBrickInsertionMode(true)
+        XCTAssertFalse(viewController.collectionView(viewController.collectionView, canMoveItemAt: indexPathStartScript))
     }
 }

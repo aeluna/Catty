@@ -1007,6 +1007,7 @@
 		59B7A8D32504E83F001C736A /* StageMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B7A8D22504E83F001C736A /* StageMock.swift */; };
 		59B9F633202D8F8500937299 /* MediaLibraryDownloader.downloadIndex.success.json in Resources */ = {isa = PBXBuildFile; fileRef = 59B9F631202D8F6200937299 /* MediaLibraryDownloader.downloadIndex.success.json */; };
 		59BA5C6825E3EC9500CBD5CF /* StoreProjectDownloaderErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BA5C6725E3EC9500CBD5CF /* StoreProjectDownloaderErrorTests.swift */; };
+		59C45D782611102D000456E4 /* ScriptMovementTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C45D772611102D000456E4 /* ScriptMovementTests.swift */; };
 		59CC6F7F252E38FA00BF0C3C /* StoreProjectReporter.reportProject.authentication.fail.json in Resources */ = {isa = PBXBuildFile; fileRef = 59CC6F7E252E38FA00BF0C3C /* StoreProjectReporter.reportProject.authentication.fail.json */; };
 		59D008E9208E3FDC000539E7 /* MotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D008E8208E3FDC000539E7 /* MotionManager.swift */; };
 		59D008ED208E4249000539E7 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D008EC208E4249000539E7 /* LocationManager.swift */; };
@@ -2982,6 +2983,7 @@
 		59B7A8D22504E83F001C736A /* StageMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StageMock.swift; sourceTree = "<group>"; };
 		59B9F631202D8F6200937299 /* MediaLibraryDownloader.downloadIndex.success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MediaLibraryDownloader.downloadIndex.success.json; sourceTree = "<group>"; };
 		59BA5C6725E3EC9500CBD5CF /* StoreProjectDownloaderErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreProjectDownloaderErrorTests.swift; sourceTree = "<group>"; };
+		59C45D772611102D000456E4 /* ScriptMovementTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptMovementTests.swift; sourceTree = "<group>"; };
 		59CC6F7E252E38FA00BF0C3C /* StoreProjectReporter.reportProject.authentication.fail.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = StoreProjectReporter.reportProject.authentication.fail.json; sourceTree = "<group>"; };
 		59D008E8208E3FDC000539E7 /* MotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionManager.swift; sourceTree = "<group>"; };
 		59D008EC208E4249000539E7 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -7376,6 +7378,7 @@
 				4C1EDCA9218A080200B60464 /* ScriptCollectionVCTests.swift */,
 				BA6805AD21303B48004F004F /* VariableTests.swift */,
 				6F38BF65247536F70052C692 /* ListTests.swift */,
+				59C45D772611102D000456E4 /* ScriptMovementTests.swift */,
 			);
 			path = ScriptCollectionView;
 			sourceTree = "<group>";
@@ -11520,6 +11523,7 @@
 				4CB1FB741BC2D74F0000A2FE /* XCTestCaseExtension.swift in Sources */,
 				BC19327F21186504009DE43A /* CreateProjectTests.swift in Sources */,
 				BCFED6ED2111C04000BE57BF /* BackgroundsTests.swift in Sources */,
+				59C45D782611102D000456E4 /* ScriptMovementTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

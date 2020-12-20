@@ -304,6 +304,23 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section
             [self reloadData];
             [self.object.scene.project saveToDiskWithNotification:YES];
         }];
+        
+        
+        
+        [actionSheet addDefaultActionWithTitle:kLocalizedMoveScript handler:^{
+            script.animateInsertBrick = YES;
+            script.animateMoveBrick = YES;
+            // action
+           //
+            //NSMutableArray<Brick *>* brickListToCopy = [self removeBrickListAndReturn:script fromIndexPath:indexPath];
+            
+            [[BrickInsertManager sharedInstance] setBrickMoveMode:YES];
+            [self turnOnInsertingBrickMode];
+            //[self reloadData];
+            
+            //[self setBrickListForScript:script withBrickList:brickListToCopy];
+            [self reloadData];
+        }];
     }
     
     [[[[actionSheet build]
@@ -318,6 +335,40 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section
      }]
      showWithController:self];
 }
+
+/*
+-(void)setBrickListForScript:(Script*)script
+               withBrickList:(NSMutableArray<Brick *>*)brickList
+{
+    if (!script.animateMoveBrick) {
+        if (brickList.count > 0) {
+            script.brickList = [[NSMutableArray alloc] init];
+            [script.brickList addObjectsFromArray:brickList];
+        }
+    }
+}
+*/
+/*
+-(NSMutableArray<Brick *>*) removeBrickListAndReturn:(Script*)script
+                                       fromIndexPath:(NSIndexPath*)indexPath
+{
+    NSMutableArray<Brick *>* brickListToCopy = [[NSMutableArray alloc] init];
+    if (script.brickList.count > 0) {
+        [brickListToCopy addObjectsFromArray:script.brickList];
+    }
+    
+    NSInteger numberOfItems = [self.collectionView numberOfItemsInSection:indexPath.section];
+    NSMutableArray<NSIndexPath *> *indexesToDelete = [[NSMutableArray<NSIndexPath*> alloc] init];
+    for (int i = 1; i < numberOfItems; i++) {
+        [indexesToDelete addObject:[NSIndexPath indexPathForItem:i inSection:indexPath.section]];
+    }
+    // todo: find better solution....
+    //[script.brickList removeAllObjects];
+    [self.collectionView deleteItemsAtIndexPaths:indexesToDelete];
+    
+    return brickListToCopy;
+}
+ */
 
 - (void)deleteAlertView
 {
@@ -381,8 +432,20 @@ minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
     if (fromIndexPath.item == 0) {
         Script *script = [self.object.scriptList objectAtIndex:fromIndexPath.section];
+        
+        NSMutableArray<Brick *>* brickListToCopy = [[NSMutableArray alloc] init];
+        if (script.brickList.count > 0) {
+            [brickListToCopy addObjectsFromArray:script.brickList];
+            [script.brickList removeAllObjects];
+        }
+        
         [self.object.scriptList removeObjectAtIndex:fromIndexPath.section];
         [self.object.scriptList insertObject:script atIndex:toIndexPath.section];
+        
+        if (brickListToCopy.count > 0) {
+            script.brickList = [[NSMutableArray alloc] init];
+            [script.brickList addObjectsFromArray:brickListToCopy];
+        }
         return;
     }
     if (fromIndexPath.section == toIndexPath.section) {
@@ -433,6 +496,7 @@ didEndDraggingItemAtIndexPath:(NSIndexPath*)indexPath
     
     if ([[BrickInsertManager sharedInstance] isBrickInsertionMode]) {
         Script *script = [self.object.scriptList objectAtIndex:indexPath.section];
+        
         if (indexPath.item != 0) {
             Brick *brick;
             if (script.brickList.count >= 1) {
@@ -486,9 +550,9 @@ willBeginDraggingItemAtIndexPath:(NSIndexPath*)indexPath
         if (indexPath.item != 0) {
             brick = [script.brickList objectAtIndex:indexPath.item - 1];
         }
-        return (script.animateInsertBrick || brick.animateMoveBrick || brick.animateInsertBrick);
+        return (script.animateMoveBrick || script.animateInsertBrick || brick.animateMoveBrick || brick.animateInsertBrick);
     }
-    BOOL editable = ((self.isEditing || indexPath.item == 0) ? NO : YES);
+    BOOL editable = ((self.isEditing) ? NO : YES);
     return ((editable || [[BrickInsertManager sharedInstance] isBrickInsertionMode]) ? YES : editable);
 }
 
