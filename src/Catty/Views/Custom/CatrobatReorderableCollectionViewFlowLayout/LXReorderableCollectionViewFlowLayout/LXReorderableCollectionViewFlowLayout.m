@@ -177,6 +177,12 @@ static NSString * const kLXCollectionViewKeyPath = @"collectionView";
         return;
     }
     
+    if ((previousIndexPath.item == 0 && previousIndexPath.section >= 0)
+        && (_selectedItemIndexPath.item != 0 && _selectedItemIndexPath.section != 0)) {
+        long section = newIndexPath.section;
+        newIndexPath = [NSIndexPath indexPathForItem:0 inSection:section];
+    }
+    
     if ([self.dataSource respondsToSelector:@selector(collectionView:itemAtIndexPath:canMoveToIndexPath:)] &&
         ![self.dataSource collectionView:self.collectionView itemAtIndexPath:previousIndexPath canMoveToIndexPath:newIndexPath]) {
         return;
